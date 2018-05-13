@@ -1,0 +1,44 @@
+﻿<Window x:Class="eTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:eTracker"
+        xmlns:moonPdfLib="clr-namespace:MoonPdfLib;assembly=MoonPdfLib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="180"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid x:Name="mainGrid" Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" ></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Button x:Name="LoadFile" Width="80" Click="LoadFile_Click">Load PDF</Button>
+                <Button x:Name="StartBtn" IsEnabled="False" Width="80" Click="StartBtn_Click">Start</Button>
+                <Button x:Name="StopBtn" IsEnabled="False" Width="80" Click="StopBtn_Click">Stop</Button>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBox x:Name="translateTxt" IsEnabled="false" ></TextBox>
+            <Button x:Name="btnTranslate" IsEnabled="false" Click="btnTranslate_Click">Translate</Button>
+            <TextBlock x:Name="translatedTxtBlock"></TextBlock>
+            <Label HorizontalAlignment="Center" FontWeight="Bold">Synonyms</Label>
+            <ListView x:Name="synoLst" SelectionChanged="SynoLst_OnSelectionChanged"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Grid.Column="1">
+            <Run>Duration:</Run>
+            <Run x:Name="durationRun" Text="{Binding CurrentTimeSpan}"></Run>
+        </TextBlock>
+        
+    </Grid>
+</Window>

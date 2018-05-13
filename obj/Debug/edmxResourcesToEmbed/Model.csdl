@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DetailRecord">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecordId" Type="Int32" />
+    <Property Name="UnknownWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TranslatedWords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SuggestedSynonisms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SelectedSynonism" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentPageNo" Type="Int32" />
+    <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Record" Relationship="Self.FK__DetailRec__Recor__5CD6CB2B" FromRole="DetailRecord" ToRole="Record" />
+  </EntityType>
+  <EntityType Name="Record">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="L1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PDFFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="DetailRecords" Relationship="Self.FK__DetailRec__Recor__5CD6CB2B" FromRole="Record" ToRole="DetailRecord" />
+  </EntityType>
+  <Association Name="FK__DetailRec__Recor__5CD6CB2B">
+    <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+    <End Role="DetailRecord" Type="Self.DetailRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Record">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailRecord">
+        <PropertyRef Name="RecordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DetailRecords" EntityType="Self.DetailRecord" />
+    <EntitySet Name="Records" EntityType="Self.Record" />
+    <AssociationSet Name="FK__DetailRec__Recor__5CD6CB2B" Association="Self.FK__DetailRec__Recor__5CD6CB2B">
+      <End Role="Record" EntitySet="Records" />
+      <End Role="DetailRecord" EntitySet="DetailRecords" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

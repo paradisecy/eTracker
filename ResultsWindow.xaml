@@ -1,0 +1,48 @@
+﻿<Window x:Class="eTracker.ResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:eTracker"
+        mc:Ignorable="d"
+        Title="Results" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        >
+    <ScrollViewer Name="ScrollViewer1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="Auto" Width="Auto"  CanContentScroll="True">
+        <Grid>
+            <StackPanel CanVerticallyScroll="True">
+                <ListView Margin="10" Name="listAll">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Label FontWeight="Bold">Record</Label>
+                                <StackPanel>
+                                    <TextBlock><Run Text="Id: "/><Run Text="{Binding Record.Id}"/></TextBlock>
+                                    <TextBlock><Run Text="L1: "/><Run Text="{Binding Record.L1}"/></TextBlock>
+                                    <TextBlock><Run Text="Age: "/><Run Text="{Binding Record.Age}"/></TextBlock>
+                                    <TextBlock><Run Text="StartDate: "></Run><Run Text="{Binding Record.StartDate}"/></TextBlock>
+                                    <TextBlock><Run Text="Duration: "/><Run Text="{Binding Record.Duration}"/></TextBlock>
+                                </StackPanel>
+                                <Label FontWeight="Bold">Record Details</Label>
+                                <DataGrid x:Name="dataGrid" ItemsSource="{Binding DetailRecords}" AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<Label>Generated Tree</Label>
+                <TreeView x:Name="LearnedTree"/>-->
+                <Label>Generated Rules</Label>
+                <TextBlock x:Name="txtRules"/>
+                <Label>Generated Code</Label>
+                <TextBlock x:Name="txtCode"/>
+                <Label>Query</Label>
+                <ListView x:Name="qList"/>
+                <WrapPanel>
+                    <TextBox Width="400" x:Name="txtQuery"></TextBox>
+                    <Button Click="ButtonBase_OnClick">Query</Button>
+                </WrapPanel>
+            </StackPanel>
+
+
+        </Grid>
+    </ScrollViewer>
+</Window>

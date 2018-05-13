@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DetailRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecordId" Type="int" />
+          <Property Name="UnknownWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranslatedWords" Type="nvarchar(max)" />
+          <Property Name="SuggestedSynonisms" Type="nvarchar(max)" />
+          <Property Name="SelectedSynonism" Type="nvarchar(max)" />
+          <Property Name="CurrentPageNo" Type="int" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="L1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" />
+          <Property Name="PDFFile" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__DetailRec__Recor__5CD6CB2B">
+          <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+          <End Role="DetailRecord" Type="Self.DetailRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Record">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailRecord">
+              <PropertyRef Name="RecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="DetailRecord" EntityType="Self.DetailRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DetailRec__Recor__5CD6CB2B" Association="Self.FK__DetailRec__Recor__5CD6CB2B">
+            <End Role="Record" EntitySet="Record" />
+            <End Role="DetailRecord" EntitySet="DetailRecord" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DetailRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecordId" Type="Int32" />
+          <Property Name="UnknownWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranslatedWords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SuggestedSynonisms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SelectedSynonism" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentPageNo" Type="Int32" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__DetailRec__Recor__5CD6CB2B" FromRole="DetailRecord" ToRole="Record" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="L1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PDFFile" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DetailRecords" Relationship="Self.FK__DetailRec__Recor__5CD6CB2B" FromRole="Record" ToRole="DetailRecord" />
+        </EntityType>
+        <Association Name="FK__DetailRec__Recor__5CD6CB2B">
+          <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+          <End Role="DetailRecord" Type="Self.DetailRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Record">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailRecord">
+              <PropertyRef Name="RecordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DetailRecords" EntityType="Self.DetailRecord" />
+          <EntitySet Name="Records" EntityType="Self.Record" />
+          <AssociationSet Name="FK__DetailRec__Recor__5CD6CB2B" Association="Self.FK__DetailRec__Recor__5CD6CB2B">
+            <End Role="Record" EntitySet="Records" />
+            <End Role="DetailRecord" EntitySet="DetailRecords" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="DetailRecords">
+            <EntityTypeMapping TypeName="DatabaseModel.DetailRecord">
+              <MappingFragment StoreEntitySet="DetailRecord">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="UnknownWord" ColumnName="UnknownWord" />
+                <ScalarProperty Name="TranslatedWords" ColumnName="TranslatedWords" />
+                <ScalarProperty Name="SuggestedSynonisms" ColumnName="SuggestedSynonisms" />
+                <ScalarProperty Name="SelectedSynonism" ColumnName="SelectedSynonism" />
+                <ScalarProperty Name="CurrentPageNo" ColumnName="CurrentPageNo" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Records">
+            <EntityTypeMapping TypeName="DatabaseModel.Record">
+              <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="L1" ColumnName="L1" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="PDFFile" ColumnName="PDFFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

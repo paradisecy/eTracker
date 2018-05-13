@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DetailRecord">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecordId" Type="int" />
+    <Property Name="UnknownWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="TranslatedWords" Type="nvarchar(max)" />
+    <Property Name="SuggestedSynonisms" Type="nvarchar(max)" />
+    <Property Name="SelectedSynonism" Type="nvarchar(max)" />
+    <Property Name="CurrentPageNo" Type="int" />
+    <Property Name="TimeStamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Record">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="L1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Age" Type="int" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Duration" Type="nvarchar" MaxLength="50" />
+    <Property Name="PDFFile" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__DetailRec__Recor__5CD6CB2B">
+    <End Role="Record" Type="Self.Record" Multiplicity="0..1" />
+    <End Role="DetailRecord" Type="Self.DetailRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Record">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailRecord">
+        <PropertyRef Name="RecordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseModelStoreContainer">
+    <EntitySet Name="DetailRecord" EntityType="Self.DetailRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__DetailRec__Recor__5CD6CB2B" Association="Self.FK__DetailRec__Recor__5CD6CB2B">
+      <End Role="Record" EntitySet="Record" />
+      <End Role="DetailRecord" EntitySet="DetailRecord" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

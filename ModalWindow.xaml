@@ -1,0 +1,30 @@
+﻿<Window x:Class="eTracker.ModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:eTracker"
+        mc:Ignorable="d"
+        Title="Start" Height="150" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">L1</Label>
+        <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Age</Label>
+        <ComboBox x:Name="L1Combo" Width="100" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="AgeCombo" Width="100" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Width="100" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Button_Click">Start</Button>
+    </Grid>
+</Window>

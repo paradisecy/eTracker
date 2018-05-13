@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+    <EntitySetMapping Name="DetailRecords">
+      <EntityTypeMapping TypeName="DatabaseModel.DetailRecord">
+        <MappingFragment StoreEntitySet="DetailRecord">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+          <ScalarProperty Name="UnknownWord" ColumnName="UnknownWord" />
+          <ScalarProperty Name="TranslatedWords" ColumnName="TranslatedWords" />
+          <ScalarProperty Name="SuggestedSynonisms" ColumnName="SuggestedSynonisms" />
+          <ScalarProperty Name="SelectedSynonism" ColumnName="SelectedSynonism" />
+          <ScalarProperty Name="CurrentPageNo" ColumnName="CurrentPageNo" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Records">
+      <EntityTypeMapping TypeName="DatabaseModel.Record">
+        <MappingFragment StoreEntitySet="Record">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="L1" ColumnName="L1" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="PDFFile" ColumnName="PDFFile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
